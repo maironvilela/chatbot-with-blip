@@ -1,16 +1,16 @@
 import { createContext } from 'react'
-import { AuthenticateAxiosAdapter } from '../infra/gateways/authenticate-axios-adapter'
+import { AuthenticateAxiosAdapter } from '../infra/gateways/authenticateAxiosAdapter'
 
 type AuthenticateContextProviderProps = {
   children: React.ReactNode
 }
 
 type AuthResponse = {
-  status: number
+  isAccessAllowed: boolean
 }
 
 type AuthenticateContextTypes = {
-  auth: () => Promise<AuthResponse>
+  auth: (apiKey: string) => Promise<AuthResponse>
 }
 
 export const AuthenticateContext = createContext({} as AuthenticateContextTypes)
@@ -19,18 +19,15 @@ export function AuthenticateContextProvider({
   children,
 }: AuthenticateContextProviderProps) {
 
-  const auth = async () => {
-    const apiKey = import.meta.env.VITE_BLIP_API_KEY
+  const auth = async (apiKey: string) => {
     const url = import.meta.env.VITE_BLIP_API_URL
 
     const axios = new AuthenticateAxiosAdapter();
-    const status = await axios.authenticate({ apiKey, url });
-    return status
+    const isAccessAllowed = await axios.authenticate({ apiKey, url });
+    return {
+      isAccessAllowed
+    }
   }
-
-
-
-
   return (
     <AuthenticateContext.Provider value={{ auth }}>
       {children}

@@ -6,14 +6,23 @@ export class AuthenticateAxiosAdapter implements AuthenticateGateway {
   async authenticate({
     apiKey,
     url,
-  }: AuthenticateGateway.Props): Promise<AuthenticateGateway.Response> {
+  }: AuthenticateGateway.Props): Promise<boolean> {
     const { body, headers } =
       BlipHttpHelpers.getInformationEndPointAuthenticate(apiKey)
 
-    const { status } = await axios.post(url, body, {
-      headers,
-    })
+    let isAccessAllowed = true
 
-    return { status }
+    await axios
+      .post(url, body, {
+        headers,
+        validateStatus(status: number) {
+          return status === 200
+        },
+      })
+      .catch(() => {
+        isAccessAllowed = false
+      })
+
+    return isAccessAllowed
   }
 }
