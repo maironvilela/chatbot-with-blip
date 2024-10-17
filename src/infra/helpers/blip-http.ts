@@ -5,7 +5,7 @@ type InformationGetContactsWithPagingEndPointProps = {
 }
 
 export const BlipHttpHelpers = {
-  getInformationEndPointAuthenticate(apiKey: string) {
+  getBodyAndHeadersAuthenticate(apiKey: string) {
     const headers = {
       'Content-Type': 'application/json',
       Authorization: `${apiKey}`,
