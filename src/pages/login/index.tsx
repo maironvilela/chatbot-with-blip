@@ -27,10 +27,17 @@ export function Login() {
     }
     return (
 
-        <div className="w-full flex items-center justify-center">
-            <div>
-                <form onSubmit={handleSubmit} className="w-[1200px] flex flex-col items-center  gap-4" >
+        <div className="grid grid-cols-2 bg-gray-100  h-screen">
+            <div className="flex flex-col justify-between text-center  py-20 h-full bg-violet-600 ">
 
+                <img className="skew-y-6 -scale-x-125	" src='./public/assets/images/bot.svg' />
+                <h2 className=" text-gray-50 text-3xl">Toda pergunta tem uma resposta.</h2>
+
+
+            </div>
+            <div className="flex flex-col items-center justify-center h-full px-16">
+                <h2 className="text-3xl py-4">ChatBot</h2>
+                <form onSubmit={handleSubmit} className="w-[1200px] flex flex-col items-center  gap-4" >
                     <TextField.Root className="w-[50%]" placeholder="Informe a apiKey" radius="small" name="apiKey" />
                     <Button variant="outline" loading={false} radius={"large"}>Acessar API </Button>
 
