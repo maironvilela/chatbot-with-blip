@@ -4,6 +4,7 @@ import { App } from './App'
 
 
 import { Login } from './pages/login'
+import { Contact } from './pages/contact';
 
 export const router = createBrowserRouter([
   {
@@ -14,8 +15,10 @@ export const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/contato/:id",
+    element: <Contact />,
   }
-
-
 ]);
 

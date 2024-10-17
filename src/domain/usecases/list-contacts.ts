@@ -1,9 +1,19 @@
 import { Contact } from '../models/contact'
 
-export interface ListContactsUseCase {
-  execute(): Promise<ListContacts.Response>
+export interface ListContactsPaginatorUseCase {
+  execute(
+    data: ListContactsPaginatorUseCase.Props
+  ): Promise<ListContactsPaginatorUseCase.Response>
 }
 
-export namespace ListContacts {
-  export type Response = Contact
+export namespace ListContactsPaginatorUseCase {
+  export type Props = {
+    apiKey: string
+    skip: string
+    take: string
+    url: string
+  }
+  export type Response = {
+    contacts: Contact[]
+  }
 }

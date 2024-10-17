@@ -13,6 +13,7 @@
     "@radix-ui/themes": "^3.1.4",
     "axios": "^1.7.7",
     "blip-chat-web": "^1.0.3",
+    "date-fns": "^4.1.0",
     "dotenv": "^16.4.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
