@@ -9,7 +9,7 @@ export interface ListContactGateway {
 export namespace ListContactGateway {
   export type Props = {
     apiKey: string
-    skip: string
+    skip: number
     take: string
     url: string
   }

@@ -6,7 +6,7 @@ export class AuthenticateService implements AuthenticateUseCase {
   constructor(private httpClient: HttpClient) {}
   async execute(apiKey: string): Promise<boolean> {
     try {
-      const url = import.meta.env.VITE_BLIP_API_URL
+      const url = import.meta.env.VITE_BLIP_API_URL //TODO: Verificar melhor local
 
       const { body, headers } =
         BlipHttpHelpers.getBodyAndHeadersAuthenticate(apiKey)

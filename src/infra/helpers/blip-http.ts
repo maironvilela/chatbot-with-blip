@@ -1,6 +1,6 @@
 type InformationGetContactsWithPagingEndPointProps = {
-  skip: string
-  take: string
+  skip: number
+  take: number
   apiKey: string
 }
 

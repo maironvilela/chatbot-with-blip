@@ -38,7 +38,6 @@ export function Contact() {
             })
             setMessagens(response.data.resource.items)
 
-            console.log(response.data.resource.items)
         }
 
         getData()
@@ -49,7 +48,6 @@ export function Contact() {
 
     const date = new Date(dataString)
 
-    console.log(date)
 
 
     return (

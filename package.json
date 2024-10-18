@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@faker-js/faker": "^9.0.3",
     "@radix-ui/themes": "^3.1.4",
     "axios": "^1.7.7",
     "blip-chat-web": "^1.0.3",

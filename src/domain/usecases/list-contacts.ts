@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Contact } from '../models/contact'
 
 export interface ListContactsPaginatorUseCase {
@@ -8,12 +9,14 @@ export interface ListContactsPaginatorUseCase {
 
 export namespace ListContactsPaginatorUseCase {
   export type Props = {
-    apiKey: string
-    skip: string
-    take: string
     url: string
+    body: any
+    headers: any
   }
   export type Response = {
-    contacts: Contact[]
+    data: {
+      contacts: Contact[]
+      numberOfRecords: number
+    }
   }
 }

@@ -10,6 +10,7 @@ import { AuthenticateContextProvider } from './contexts/authenticate.tsx'
 import { router } from './router.tsx'
 import { RouterProvider } from 'react-router-dom'
 import { Theme } from '@radix-ui/themes'
+import { ContactContextProvider } from './contexts/contact.tsx';
 
 
 
@@ -17,7 +18,9 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Theme>
       <AuthenticateContextProvider>
-        <RouterProvider router={router} />
+        <ContactContextProvider>
+          <RouterProvider router={router} />
+        </ContactContextProvider>
       </AuthenticateContextProvider>
     </Theme>
 

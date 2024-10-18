@@ -2,6 +2,7 @@ export type ContactProps = {
   identity: string
   name: string
   email: string
+  imageUrl?: string
 }
 
 export class Contact {
@@ -16,6 +17,9 @@ export class Contact {
   }
 
   public get email(): string {
+    return this.props.name
+  }
+  public get imageUrl(): string {
     return this.props.name
   }
 

@@ -3,6 +3,7 @@ import { Button, TextField } from "@radix-ui/themes";
 import { useContext } from "react";
 import { AuthenticateContext } from "../../contexts/authenticate";
 import { useNavigate } from "react-router";
+import { BotIcon } from "./components/bot-icon";
 
 
 export function Login() {
@@ -30,7 +31,8 @@ export function Login() {
         <div className="grid grid-cols-2 bg-gray-100  h-screen">
             <div className="flex flex-col justify-between text-center  py-20 h-full bg-violet-600 ">
 
-                <img className="skew-y-6 -scale-x-125	" src='./public/assets/images/bot.svg' />
+                <BotIcon />
+
                 <h2 className=" text-gray-50 text-3xl">Toda pergunta tem uma resposta.</h2>
 
             </div>

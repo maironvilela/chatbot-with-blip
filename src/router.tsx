@@ -1,15 +1,15 @@
 import { createBrowserRouter } from 'react-router-dom'
 
-import { App } from './App'
+import { Contacts } from './pages/contacts/index.ts'
 
 
 import { Login } from './pages/login'
-import { Contact } from './pages/contact';
+import { Contact } from './pages/messages';
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <Contacts />,
   },
 
   {
