@@ -9,7 +9,6 @@ import { ptBR } from "date-fns/locale";
 
 export function Contact() {
 
-
     const { id } = useParams();
     const [messages, setMessages] = useState<Message[]>([])
 
@@ -30,8 +29,6 @@ export function Contact() {
 
     }, [getMessagesContact, id])
 
-
-
     return (
         <div className="flex justify-center">
             <div className="flex flex-col gap-12 w-[800px]">
@@ -49,7 +46,6 @@ export function Contact() {
                         locale: ptBR,
                         addSuffix: true
                     });
-
 
                     if (m.type === 'text/plain') {
                         return (
@@ -73,7 +69,6 @@ export function Contact() {
                     }
 
                     if (m.type === 'application/vnd.lime.select+json') {
-                        console.log(m.content.options)
                         return (
                             <div key={m.id} className={`flex flex-col gap-2 w-2/3  p-4 ${m.direction === 'sent' ? " bg-gray-100" : "bg-green-100 ml-auto"}`} >
                                 <div className="flex ">
@@ -82,7 +77,7 @@ export function Contact() {
                                         <span>{m.content.text}</span>
                                         <ul>
                                             {m.content.options.map((option: { text: string }) => (
-                                                <li>{option.text}</li>
+                                                <li key={option.text[0]} className="text-gray-400">{option.text}</li>
                                             ))}
                                         </ul>
                                     </div>

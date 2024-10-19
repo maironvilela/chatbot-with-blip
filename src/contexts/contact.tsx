@@ -1,7 +1,8 @@
 import { createContext } from 'react'
 import { Contact } from '../domain/models/contact'
 import { makeListContactsService } from '../main/factories/list-contacts-service'
-import { FindAllConversationOfContactService } from '../data/service/find-all-conversation-of-contacts'
+import { makeFindAllConversationContactsService } from '../main/factories/find-all-conversation-contacts-service'
+
 
 type ContactProps = {
     children: React.ReactNode
@@ -48,10 +49,10 @@ export function ContactContextProvider({
     }
 
     const getMessagesContact = async (id: string) => {
-        const find = new FindAllConversationOfContactService();
-        const response = await find.findConversationOfContacts({ id });
-        return response.data.resource.items;
 
+        const findAllConversationOfContactService = makeFindAllConversationContactsService()
+        const response = await findAllConversationOfContactService.findConversationOfContacts({ id });
+        return response.data.resource.items;
     }
 
     return (

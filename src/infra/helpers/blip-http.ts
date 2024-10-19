@@ -36,4 +36,14 @@ export const BlipHttpHelpers = {
 
     return { body }
   },
+
+  getBodyFindAllConversationsEndPoint(id: string) {
+    const body = {
+      id: '{{$guid}}',
+      method: 'get',
+      uri: `/threads/${id}?refreshExpiredMedia=true`,
+    }
+
+    return { body }
+  },
 }

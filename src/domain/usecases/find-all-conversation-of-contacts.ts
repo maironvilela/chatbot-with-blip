@@ -6,7 +6,7 @@ export interface FindAllConversationOfContactsUseCase {
 
 export namespace FindAllConversationOfContactsUseCase {
   export type Props = {
-    id?: string
+    id: string
   }
   export type Response = any
 }
