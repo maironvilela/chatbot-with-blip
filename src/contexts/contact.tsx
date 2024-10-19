@@ -41,7 +41,12 @@ export function ContactContextProvider({
 }: ContactProps) {
 
     const getContactList = async ({ skip, take }: getContactListProps): Promise<getContactListResponse> => {
-        const listContactService = makeListContactsService()
+
+        const apiKey = localStorage.getItem("apiKey")
+
+        if (!apiKey) { throw new Error("ApiKey não encontrado") }
+
+        const listContactService = makeListContactsService(apiKey)
         const contacts = await listContactService.execute({
             skip, take
         })
@@ -49,8 +54,10 @@ export function ContactContextProvider({
     }
 
     const getMessagesContact = async (id: string) => {
+        const apiKey = localStorage.getItem("apiKey")
 
-        const findAllConversationOfContactService = makeFindAllConversationContactsService()
+        if (!apiKey) { throw new Error("ApiKey não encontrado") }
+        const findAllConversationOfContactService = makeFindAllConversationContactsService(apiKey)
         const response = await findAllConversationOfContactService.findConversationOfContacts({ id });
         return response.data.resource.items;
     }

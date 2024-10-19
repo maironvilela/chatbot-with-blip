@@ -1,5 +1,5 @@
-import { FindAllConversationOfContactsUseCase } from '../../domain/usecases/find-all-conversation-of-contacts'
-import { FindAllConversationContactsGateway } from '../protocols/gateways/find-all-conversation-contacts'
+import { FindAllConversationOfContactsUseCase } from '../../../domain/usecases/find-all-conversation-of-contacts'
+import { FindAllConversationContactsGateway } from '../../protocols/gateways/find-all-conversation-contacts'
 
 export class FindAllConversationOfContactService
   implements FindAllConversationOfContactsUseCase

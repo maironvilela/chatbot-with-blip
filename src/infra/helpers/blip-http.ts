@@ -1,10 +1,13 @@
 type InformationGetContactsWithPagingEndPointProps = {
   skip: number
   take: number
+  apiKey: string
 }
 
 export const BlipHttpHelpers = {
   getBodyAndHeadersAuthenticate(apiKey: string) {
+    const url = import.meta.env.VITE_BLIP_API_URL
+
     const headers = {
       'Content-Type': 'application/json',
       Authorization: `${apiKey}`,
@@ -20,12 +23,13 @@ export const BlipHttpHelpers = {
       },
     }
 
-    return { headers, body }
+    return { headers, body, url }
   },
 
   getInformationGetContactsWithPagingEndPoint({
     skip,
     take,
+    apiKey,
   }: InformationGetContactsWithPagingEndPointProps) {
     const body = {
       id: '{{$guid}}',
@@ -34,16 +38,26 @@ export const BlipHttpHelpers = {
       uri: `/contacts?$skip=${skip}&$take=${take}`,
     }
 
-    return { body }
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: apiKey,
+    }
+
+    return { body, headers }
   },
 
-  getBodyFindAllConversationsEndPoint(id: string) {
+  getBodyFindAllConversationsEndPoint(id: string, apiKey: string) {
     const body = {
       id: '{{$guid}}',
       method: 'get',
       uri: `/threads/${id}?refreshExpiredMedia=true`,
     }
 
-    return { body }
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: apiKey,
+    }
+
+    return { body, headers }
   },
 }

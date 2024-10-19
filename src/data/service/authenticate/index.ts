@@ -1,5 +1,5 @@
-import { AuthenticateUseCase } from '../../domain/usecases/authenticate'
-import { AuthenticatorGateway } from '../protocols/gateways/authenticator'
+import { AuthenticateUseCase } from '../../../domain/usecases/authenticate'
+import { AuthenticatorGateway } from '../../protocols/gateways/authenticator'
 
 export class AuthenticateService implements AuthenticateUseCase {
   constructor(private authenticateGateway: AuthenticatorGateway) {}

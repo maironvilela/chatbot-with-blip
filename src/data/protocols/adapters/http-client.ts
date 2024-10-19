@@ -8,7 +8,7 @@ export namespace HttpClient {
   export type Props = {
     url?: string
     body: any
-    headers?: any
+    headers: any
   }
   export type Response = {
     status: number

@@ -8,6 +8,7 @@ type AuthenticateContextProviderProps = {
 
 type AuthenticateContextTypes = {
   auth: (apiKey: string) => Promise<boolean>
+  isUserAuthenticated: () => boolean
 }
 
 export const AuthenticateContext = createContext({} as AuthenticateContextTypes)
@@ -19,12 +20,21 @@ export function AuthenticateContextProvider({
   const auth = async (apiKey: string) => {
 
     const authenticateService = makeAuthenticateService();
-    const response = await authenticateService.execute(apiKey)
-    return response
+    const isKayValid = await authenticateService.execute(apiKey)
+
+    if (isKayValid) {
+      localStorage.setItem("apiKey", apiKey)
+    }
+    return isKayValid
+  }
+
+  const isUserAuthenticated = () => {
+    const apiKey = localStorage.getItem("apiKey")
+    return apiKey !== null
   }
 
   return (
-    <AuthenticateContext.Provider value={{ auth }}>
+    <AuthenticateContext.Provider value={{ auth, isUserAuthenticated }}>
       {children}
     </AuthenticateContext.Provider>
   )

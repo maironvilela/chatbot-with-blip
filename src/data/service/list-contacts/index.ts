@@ -1,5 +1,5 @@
-import { ListContactsPaginatorUseCase } from '../../domain/usecases/list-contacts'
-import { ListContactGateway } from '../protocols/gateways/list-contacts'
+import { ListContactsPaginatorUseCase } from '../../../domain/usecases/list-contacts'
+import { ListContactGateway } from '../../protocols/gateways/list-contacts'
 
 export class ListContactsService implements ListContactsPaginatorUseCase {
   constructor(private listContactGateway: ListContactGateway) {}
@@ -14,11 +14,9 @@ export class ListContactsService implements ListContactsPaginatorUseCase {
         take,
         url,
       })
-
       return data
     } catch (error: any) {
-      console.log(error.message)
-      throw new Error(error.message)
+      throw new Error(error.status)
     }
   }
 }

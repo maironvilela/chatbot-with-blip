@@ -8,11 +8,17 @@ import { BotIcon } from "./components/bot-icon";
 
 export function Login() {
 
-    const { auth } = useContext(AuthenticateContext);
+    const { auth, isUserAuthenticated } = useContext(AuthenticateContext);
 
     const navigate = useNavigate();
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+
+        if (isUserAuthenticated()) {
+            navigate('/')
+        }
+
+
         event.preventDefault();
         const data = new FormData(event.currentTarget)
         const apiKey = data.get('apiKey')?.toString()

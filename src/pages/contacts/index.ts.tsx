@@ -4,6 +4,7 @@ import { CardContact } from "./components/card";
 import { useNavigate } from "react-router";
 import { ContactContext } from "../../contexts/contact";
 import { Paginator } from "./components/paginator";
+import { AuthenticateContext } from "../../contexts/authenticate";
 
 type ContactsDataType = {
   contacts: Contact[];
@@ -12,29 +13,29 @@ type ContactsDataType = {
 
 export function Contacts() {
 
+  const { isUserAuthenticated } = useContext(AuthenticateContext);
 
 
   const navigate = useNavigate();
 
   const [skip, setSkip] = useState(0)
   const [contactsData, setContactsData] = useState<ContactsDataType>()
-
-
-
-
   const { getContactList } = useContext(ContactContext)
   const TAKE = 2
 
   useEffect(() => {
+
+    if (!isUserAuthenticated()) {
+      navigate(`/login`)
+    }
+
     const getData = async () => {
       const { data } = await getContactList({ skip, take: TAKE })
       console.log(data)
       setContactsData(data);
-
-
     }
     getData();
-  }, [getContactList, TAKE, skip])
+  }, [getContactList, TAKE, skip, isUserAuthenticated, navigate])
 
 
   const handleSelectedContact = (identity: string) => {

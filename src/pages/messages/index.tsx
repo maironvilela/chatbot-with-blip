@@ -1,13 +1,17 @@
 
 import { format, formatDistanceToNow } from "date-fns";
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { ContactContext, Message } from "../../contexts/contact";
 import { getDateUtcFormat } from "../../utils/date-utc-format";
 import { ptBR } from "date-fns/locale";
+import { AuthenticateContext } from "../../contexts/authenticate";
 
 
 export function Contact() {
+    const { isUserAuthenticated } = useContext(AuthenticateContext);
+    const navigate = useNavigate();
+
 
     const { id } = useParams();
     const [messages, setMessages] = useState<Message[]>([])
@@ -15,6 +19,10 @@ export function Contact() {
     const { getMessagesContact } = useContext(ContactContext)
 
     useEffect(() => {
+
+        if (!isUserAuthenticated()) {
+            navigate(`/login`)
+        }
 
         if (!id) {
             return
@@ -27,7 +35,7 @@ export function Contact() {
 
         getData()
 
-    }, [getMessagesContact, id])
+    }, [getMessagesContact, id, isUserAuthenticated, navigate])
 
     return (
         <div className="flex justify-center">

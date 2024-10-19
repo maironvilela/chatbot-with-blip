@@ -8,9 +8,10 @@ import { BlipHttpHelpers } from '../helpers/blip-http'
 export class AuthenticateGatewayImp implements AuthenticatorGateway {
   constructor(private httpClient: HttpClient) {}
   async authenticate({ apiKey }: AuthenticateGateway.Props): Promise<boolean> {
-    const { body, headers } =
+    const { body, headers, url } =
       BlipHttpHelpers.getBodyAndHeadersAuthenticate(apiKey)
-    const response = await this.httpClient.post({ body, headers })
+    const response = await this.httpClient.auth({ body, headers, url })
+
     const isKayValid = response.status === 200
 
     return isKayValid
