@@ -1,28 +1,21 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ListContactsPaginatorUseCase } from '../../domain/usecases/list-contacts'
-import { HttpClient } from '../protocols/adapters/http-client'
+import { ListContactGateway } from '../protocols/gateways/list-contacts'
 
 export class ListContactsService implements ListContactsPaginatorUseCase {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private listContactGateway: ListContactGateway) {}
   async execute({
+    skip,
+    take,
     url,
-    body,
-    headers,
   }: ListContactsPaginatorUseCase.Props): Promise<ListContactsPaginatorUseCase.Response> {
     try {
-      const response = await this.httpClient.post({
-        body,
-        headers,
+      const data = await this.listContactGateway.getAllContactsPaginator({
+        skip,
+        take,
         url,
       })
 
-      //const contacts: Contact[] = response.data.resource.items
-      const data = {
-        contacts: response.data.resource.items,
-        numberOfRecords: response.data.resource.total,
-      }
-
-      return { data }
+      return data
     } catch (error: any) {
       console.log(error.message)
       throw new Error(error.message)

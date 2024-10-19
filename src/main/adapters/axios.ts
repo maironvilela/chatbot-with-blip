@@ -1,14 +1,22 @@
 import axios from 'axios'
 import { HttpClient } from '../../data/protocols/adapters/http-client'
+import { axiosHttpClient } from '../lib/axios'
 
 export class AxiosAdapter implements HttpClient {
-  async post({
+  async auth({
     body,
     headers,
-    url,
+    url = '',
   }: HttpClient.Props): Promise<HttpClient.Response> {
-    return await axios.post(url, body, {
+    const response = await axios.post(url, body, {
       headers,
     })
+    return response
+  }
+  async post({
+    body,
+    url = '',
+  }: HttpClient.Props): Promise<HttpClient.Response> {
+    return await axiosHttpClient.post(url, body)
   }
 }

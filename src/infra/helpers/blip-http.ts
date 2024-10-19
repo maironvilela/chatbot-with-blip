@@ -1,7 +1,6 @@
 type InformationGetContactsWithPagingEndPointProps = {
   skip: number
   take: number
-  apiKey: string
 }
 
 export const BlipHttpHelpers = {
@@ -27,12 +26,7 @@ export const BlipHttpHelpers = {
   getInformationGetContactsWithPagingEndPoint({
     skip,
     take,
-    apiKey,
   }: InformationGetContactsWithPagingEndPointProps) {
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `${apiKey}`,
-    }
     const body = {
       id: '{{$guid}}',
       to: 'postmaster@crm.msging.net',
@@ -40,6 +34,6 @@ export const BlipHttpHelpers = {
       uri: `/contacts?$skip=${skip}&$take=${take}`,
     }
 
-    return { headers, body }
+    return { body }
   },
 }

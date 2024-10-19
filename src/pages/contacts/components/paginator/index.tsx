@@ -47,3 +47,4 @@ export function Paginator({ numberOfRecords = 0, itemsPerPage, currentPage, hand
 }
 
 
+

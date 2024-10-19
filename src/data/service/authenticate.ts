@@ -1,24 +1,11 @@
 import { AuthenticateUseCase } from '../../domain/usecases/authenticate'
-import { BlipHttpHelpers } from '../../infra/helpers/blip-http'
-import { HttpClient } from '../protocols/adapters/http-client'
+import { AuthenticatorGateway } from '../protocols/gateways/authenticator'
 
 export class AuthenticateService implements AuthenticateUseCase {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private authenticateGateway: AuthenticatorGateway) {}
   async execute(apiKey: string): Promise<boolean> {
     try {
-      const url = import.meta.env.VITE_BLIP_API_URL //TODO: Verificar melhor local
-
-      const { body, headers } =
-        BlipHttpHelpers.getBodyAndHeadersAuthenticate(apiKey)
-
-      const response = await this.httpClient.post({
-        body,
-        headers,
-        url,
-      })
-
-      const isKayValid = response.status === 200
-
+      const isKayValid = await this.authenticateGateway.authenticate({ apiKey })
       return isKayValid
     } catch {
       return false

@@ -1,82 +1,112 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import axios from "axios";
-import { format, formatDate, parseISO } from "date-fns";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router";
 
-type Message = {
-    id: string;
-    direction: 'sent' | 'received';
-    date: string;
-    type: "text/plain" | "application/vnd.lime.media-link+json"
-    content: any;
-}
+import { format, formatDistanceToNow } from "date-fns";
+import { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router";
+import { ContactContext, Message } from "../../contexts/contact";
+import { getDateUtcFormat } from "../../utils/date-utc-format";
+import { ptBR } from "date-fns/locale";
+
 
 export function Contact() {
 
 
     const { id } = useParams();
-    const [messages, setMessagens] = useState<Message[]>([])
+    const [messages, setMessages] = useState<Message[]>([])
+
+    const { getMessagesContact } = useContext(ContactContext)
 
     useEffect(() => {
 
+        if (!id) {
+            return
+        }
+
         const getData = async () => {
-            const url = import.meta.env.VITE_BLIP_API_URL
-            const apiKey = import.meta.env.VITE_BLIP_API_KEY
-
-            const headers = {
-                'Content-Type': 'application/json',
-                Authorization: `${apiKey}`,
-            }
-            const body = {
-                id: "{{$guid}}",
-                method: "get",
-                "uri": `/threads/${id}?refreshExpiredMedia=true`
-            }
-            const response = await axios.post<Message[]>(url, body, {
-                headers,
-            })
-            setMessagens(response.data.resource.items)
-
+            const response = await getMessagesContact(id)
+            setMessages(response)
         }
 
         getData()
 
-    }, [id])
-
-    const dataString = '2024-10-17T00:06:01.130Z'
-
-    const date = new Date(dataString)
+    }, [getMessagesContact, id])
 
 
 
     return (
-        <div className="flex flex-col gap-12">
-            {messages.map((m) => {
-                const data = format(new Date(m.date), "dd/MM/yyyy - mm:ss ");
-                if (m.type === 'text/plain') {
+        <div className="flex justify-center">
+            <div className="flex flex-col gap-12 w-[800px]">
+                {messages.map((m) => {
+
+                    const dataHoraUtc = getDateUtcFormat(new Date(m.date));
+                    const messageDateFormatted = format(
+                        dataHoraUtc,
+                        "dd 'de' LLLL 'às' HH:mm'h'",
+                        {
+                            locale: ptBR
+                        }
+                    );
+                    const messageDateRelativeToNow = formatDistanceToNow(dataHoraUtc, {
+                        locale: ptBR,
+                        addSuffix: true
+                    });
+
+
+                    if (m.type === 'text/plain') {
+                        return (
+                            <div key={m.id} className={`flex flex-col gap-2 w-2/3 p-4 ${m.direction === 'sent' ? " bg-gray-100" : "bg-green-100 ml-auto"}`} >
+                                <div className="flex text-center justify-between ">
+                                    <div className="flex gap-2 items-center text-left w-3/4">
+                                        <img className="w-10 h-10 rounded-full" src={`/public/assets/images/${m.direction}.jpg`} alt="" />
+                                        <span>{m.content}</span>
+                                    </div>
+                                    <time className="w-30 text-gray-400 flex items-end"
+                                        title={messageDateFormatted}
+                                        dateTime={new Date(m.date).toISOString()}
+                                    >
+                                        {messageDateRelativeToNow}
+                                    </time>
+
+
+                                </div>
+                            </div>
+                        )
+                    }
+
+                    if (m.type === 'application/vnd.lime.select+json') {
+                        console.log(m.content.options)
+                        return (
+                            <div key={m.id} className={`flex flex-col gap-2 w-2/3  p-4 ${m.direction === 'sent' ? " bg-gray-100" : "bg-green-100 ml-auto"}`} >
+                                <div className="flex ">
+                                    <img className="w-10 h-10 rounded-full" src={`/public/assets/images/${m.direction}.jpg`} alt="" />
+                                    <div className="flex flex-col gap-1">
+                                        <span>{m.content.text}</span>
+                                        <ul>
+                                            {m.content.options.map((option: { text: string }) => (
+                                                <li>{option.text}</li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    }
+
                     return (
-                        <div key={m.id} className="flex flex-col gap-2">
-                            <div> <strong>id: </strong>{m.id}</div>
-                            <div> <strong>direction: </strong>{m.direction}</div>
-                            <div>  <strong>Type: </strong>{m.type}</div>
-                            <div>  <strong>date: </strong>{data}</div>
-                            <div>  <strong>Content: </strong>{m.content}</div>
+                        <div key={m.id} className={`flex flex-col gap-2 w-2/3 ${m.direction === 'sent' ? "" : "ml-auto"}`}  >
+
+                            <div className="flex gap-2">
+                                <img className="w-10 h-10 rounded-full" src={`/public/assets/images/${m.direction}.jpg`} alt="" />
+                                <div>
+                                    <img src={m.content.uri} />
+                                    <span>{m.content.text}</span>
+                                </div>
+                            </div>
                         </div>
+
                     )
-                }
-
-                return (
-                    <div key={m.id} className="flex flex-col gap-2">
-                        <div> <strong>id: </strong>{m.id}</div>
-                        <div> <strong>direction: </strong>{m.direction}</div>
-                        <div>  <strong>Type: </strong>{m.type}</div>
-                        <div>  <strong>date: </strong>{data}</div>
-                        <div>  <img src={m.content.uri} /></div>
-                    </div>
-
-                )
-            })}
+                })}
+            </div>
         </div>
     )
 }
+
