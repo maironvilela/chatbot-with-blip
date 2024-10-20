@@ -31,7 +31,6 @@ export function Contacts() {
 
     const getData = async () => {
       const { data } = await getContactList({ skip, take: TAKE })
-      console.log(data)
       setContactsData(data);
     }
     getData();

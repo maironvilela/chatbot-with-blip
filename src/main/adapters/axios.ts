@@ -18,9 +18,6 @@ export class AxiosAdapter implements HttpClient {
     url = '',
     headers,
   }: HttpClient.Props): Promise<HttpClient.Response> {
-    console.log('########################')
-    console.log(headers)
-    console.log('AxiosAdapter')
     return await axiosHttpClient.post(url, body, { headers })
   }
 }

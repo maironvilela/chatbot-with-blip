@@ -1,55 +1,92 @@
 
 import { Button, TextField } from "@radix-ui/themes";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthenticateContext } from "../../contexts/authenticate";
 import { useNavigate } from "react-router";
-import { BotIcon } from "./components/bot-icon";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 
 export function Login() {
 
-    const { auth, isUserAuthenticated } = useContext(AuthenticateContext);
-
     const navigate = useNavigate();
 
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    const { auth, isUserAuthenticated } = useContext(AuthenticateContext);
+
+    const [messagePlaceholder, setMessagePlaceholder] = useState("");
+    const [isPageWithError, setIsPageWithError] = useState(false);
+
+
+    const authenticateSchema = z.object({
+        apiKey: z.string().min(1, "Campo Obrigatório").regex(/^Key\s[a-zA-Z0-9:]+$/, "Chave Inválida"),
+    })
+
+    const { register, handleSubmit, reset, formState: { errors } } = useForm<handleAuthenticateProps>({
+        resolver: zodResolver(authenticateSchema)
+    })
+
+    useEffect(() => {
 
         if (isUserAuthenticated()) {
             navigate('/')
         }
+    })
 
-
-        event.preventDefault();
-        const data = new FormData(event.currentTarget)
-        const apiKey = data.get('apiKey')?.toString()
-        //TODO: Criar mensagem de alerta caso o apiKey não esteja preenchido
-        if (!apiKey) {
-            return
-        }
+    type handleAuthenticateProps = z.infer<typeof authenticateSchema>
+    const handleAuthenticate = async (data: handleAuthenticateProps) => {
+        const { apiKey } = data
         const isKeyValid = await auth(apiKey)
 
         if (isKeyValid) {
             navigate('/')
+            return
+        }
+
+        if (!isKeyValid) {
+            setMessagePlaceholder(" (Falha na autenticação)")
+            setIsPageWithError(true)
+            reset()
+            return
         }
     }
+
     return (
 
-        <div className="grid grid-cols-2 bg-gray-100  h-screen">
-            <div className="flex flex-col justify-between text-center  py-20 h-full bg-violet-600 ">
+        <div className="grid bg-gray-100 h-screen grid-cols-1 md:grid-cols-2 max-w-[1440px] m-auto" >
 
-                <BotIcon />
+            <section className=" hidden md:flex flex-col justify-between text-center  py-20 h-full bg-violet-600 ">
+                <img src="/public/assets/images/login.png" alt="imagens de um robo utilizando um notebook" />
+            </section >
 
-                <h2 className=" text-gray-50 text-3xl">Toda pergunta tem uma resposta.</h2>
+            <section className="flex flex-col items-center justify-center h-full w-full px-16   ">
+                <div className="flex items-center flex-col  ">
+                    <img src="/public/assets/images/login.png" alt="imagens de um robo utilizando um notebook"
+                        className="h-20 -mb-4 md:hidden" />
+                    <h2 className="text-3xl py-4 font-bold leading-3">ChatBot</h2>
+                </div>
 
-            </div>
-            <div className="flex flex-col items-center justify-center h-full px-16">
-                <h2 className="text-3xl py-4">ChatBot</h2>
-                <form onSubmit={handleSubmit} className="w-[1200px] flex flex-col items-center  gap-4" >
-                    <TextField.Root className="w-[50%]" placeholder="Informe a apiKey" radius="small" name="apiKey" />
-                    <Button variant="outline" loading={false} radius={"large"}>Acessar API </Button>
+                <form onSubmit={handleSubmit(handleAuthenticate)} className=" flex flex-col w-full gap-2 mt-4" >
+                    <TextField.Root className={`w-full truncate border outline-none  border-solid ${isPageWithError ? "border-red-500" : "border-blue-500"}`}
+                        color={`${isPageWithError ? "red" : "blue"}`}
+                        variant="soft"
+                        placeholder={`Informe a chave da API ${messagePlaceholder}`}
+                        radius="large"
+                        {...register("apiKey")}
+                    />
+                    <span className="text-red-400">{errors.apiKey?.message}</span>
+
+
+                    {!errors.apiKey && (
+                        <Button variant="outline" loading={false} radius={"large"}>Acessar API </Button>
+                    )}
+                    <span>
+                    </span>
                 </form >
-            </div>
-        </div>
+            </section >
+        </div >
+
+
 
     )
 }
