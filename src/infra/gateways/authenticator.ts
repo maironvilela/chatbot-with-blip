@@ -1,13 +1,10 @@
-import { HttpClient } from '../../data/protocols/adapters/http-client'
-import {
-  AuthenticateGateway,
-  AuthenticatorGateway,
-} from '../../data/protocols/gateways/authenticator'
-import { BlipHttpHelpers } from '../helpers/blip-http'
+import { HttpClient } from '@/data/protocols/adapters/http-client'
+import { AuthenticatorGateway } from '@/data/protocols/gateways/authenticator'
+import { BlipHttpHelpers } from '../helpers'
 
 export class AuthenticateGatewayImp implements AuthenticatorGateway {
   constructor(private httpClient: HttpClient) {}
-  async authenticate({ apiKey }: AuthenticateGateway.Props): Promise<boolean> {
+  async authenticate({ apiKey }: AuthenticatorGateway.Props): Promise<boolean> {
     const { body, headers, url } =
       BlipHttpHelpers.getBodyAndHeadersAuthenticate(apiKey)
     const response = await this.httpClient.auth({ body, headers, url })

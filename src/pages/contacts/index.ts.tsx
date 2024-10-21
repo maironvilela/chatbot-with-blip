@@ -7,7 +7,7 @@ import { AuthenticateContext } from "../../contexts/authenticate";
 
 import { GrContactInfo } from "react-icons/gr";
 import { Select } from "./components/select";
-import { Header } from "../../components/header";
+import { Header } from "@/components"
 import { ContactContext } from "../../contexts/contact";
 import { getAvatarUrl } from "../../utils/get-avatar-url";
 

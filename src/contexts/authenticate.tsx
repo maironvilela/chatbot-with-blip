@@ -1,5 +1,5 @@
 import { createContext } from 'react'
-import { makeAuthenticateService } from '../main/factories/authenticate-service'
+import { makeAuthenticateService } from '@/main/factories/authenticate-service'
 
 type AuthenticateContextProviderProps = {
   children: React.ReactNode

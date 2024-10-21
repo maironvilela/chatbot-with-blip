@@ -1,6 +1,8 @@
 import axios from 'axios'
-import { HttpClient } from '../../data/protocols/adapters/http-client'
+
 import { axiosHttpClient } from '../lib/axios'
+
+import { HttpClient } from '@/data/protocols/adapters/http-client'
 
 export class AxiosAdapter implements HttpClient {
   async auth({

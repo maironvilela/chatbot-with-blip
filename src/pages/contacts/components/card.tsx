@@ -1,4 +1,4 @@
-import { ContactProps } from "../../../domain/models/contact"
+import { ContactProps } from "@/domain/models/contact"
 import { Flex, Card, Box, Avatar, Text } from "@radix-ui/themes";
 
 type CardContactProps = ContactProps;
@@ -18,12 +18,12 @@ export function CardContact({ name, email, imageUrl }: CardContactProps) {
                         radius="full"
                         fallback="T"
                     />
-                    <Box>
+                    <Box className="truncate">
                         <Text as="div" size="2" weight="bold">
                             {name}
                         </Text>
-                        <Text as="div" size="2" color="gray">
-                            {email}
+                        <Text as="div" size="2" color="gray"  >
+                            <p className="truncate">{email}</p>
                         </Text>
                     </Box>
                 </Flex>

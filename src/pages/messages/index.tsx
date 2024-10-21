@@ -3,7 +3,6 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { AuthenticateContext } from "../../contexts/authenticate";
 import { Message } from "../../hooks/use-contact";
-import { Header } from "../../components/header";
 import { UseDate } from "./hooks/use-data";
 import { MessageOptions } from "./components/message-options";
 import { MessageText } from "./components/message.-text";
@@ -13,6 +12,7 @@ import { Link } from "react-router-dom";
 import { GiReturnArrow } from "react-icons/gi";
 import { BiMessage } from "react-icons/bi";
 import { getAvatarUrl } from "../../utils/get-avatar-url";
+import { Header } from "@/components"
 
 
 export function Contact() {
@@ -57,7 +57,7 @@ export function Contact() {
     }, [getMessagesContact, id, isUserAuthenticated, navigate])
 
     return (
-        <div className="flex gap-2 flex-col ">
+        <div className="flex gap-2 flex-col px-4 ">
             <Header />
 
             <div className="flex items-center   gap-1 p-4 text-gray-600 text-2xl">
@@ -70,7 +70,7 @@ export function Contact() {
                 <strong>{"Voltar"}</strong>
             </Link>
 
-            <div className="flex justify-center py-6">
+            <div className="flex justify-center py-16">
 
                 <div className="flex flex-col gap-12 w-[800px]">
                     {messages.map((message) => {

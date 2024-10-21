@@ -1,7 +1,7 @@
 export interface AuthenticatorGateway {
-  authenticate(data: AuthenticateGateway.Props): Promise<boolean>
+  authenticate(data: AuthenticatorGateway.Props): Promise<boolean>
 }
 
-export namespace AuthenticateGateway {
+export namespace AuthenticatorGateway {
   export type Props = { apiKey: string; url?: string }
 }

@@ -3,7 +3,6 @@ export interface HttpClient {
   auth(data: HttpClient.Props): Promise<HttpClient.Response>
 }
 
-//TODO: Definir a tipagem e recebeer como generics
 export namespace HttpClient {
   export type Props = {
     url?: string

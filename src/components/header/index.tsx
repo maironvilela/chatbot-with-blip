@@ -1,10 +1,14 @@
 import { useContext } from "react";
-import { AuthenticateContext } from "../../contexts/authenticate";
+import { useNavigate } from "react-router";
 
 import { RxExit } from "react-icons/rx";
+
 import { IconButton, Tooltip } from "@radix-ui/themes";
-import { useNavigate } from "react-router";
+
+import { AuthenticateContext } from "../../contexts/authenticate";
 import { getAvatarUrl } from "../../utils/get-avatar-url";
+
+
 export function Header() {
     const navigate = useNavigate();
 
@@ -27,7 +31,7 @@ export function Header() {
             <div className="flex items-center gap-8">
                 <div className="flex items-center gap-2">
                     <img src={avatarUrl} className="rounded-full h-8 w-8" />
-                    <h2 className="font-bold text-lg">Administrador</h2>
+                    <span className="font-bold text-lg">Administrador</span>
                 </div>
 
                 <Tooltip content="Sair">

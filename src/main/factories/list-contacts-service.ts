@@ -1,5 +1,5 @@
-import { ListContactsService } from '../../data/service/list-contacts'
-import { ContactGateway } from '../../infra/gateways/contact'
+import { ListContactsService } from '@/data/service/list-contacts'
+import { ContactGateway } from '@/infra/gateways/contact'
 import { AxiosAdapter } from '../adapters/axios'
 
 export const makeListContactsService = (

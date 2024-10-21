@@ -1,6 +1,6 @@
 import { createContext } from 'react'
-import { Contact } from '../domain/models/contact'
-import { makeListContactsService } from '../main/factories/list-contacts-service'
+import { Contact } from '@/domain/models/contact'
+import { makeListContactsService } from '@/main/factories/list-contacts-service'
 import { makeFindAllConversationContactsService } from '../main/factories/find-all-conversation-contacts-service'
 
 
