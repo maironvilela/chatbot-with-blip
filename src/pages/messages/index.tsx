@@ -57,47 +57,51 @@ export function Contact() {
     }, [getMessagesContact, id, isUserAuthenticated, navigate])
 
     return (
-        <div className="flex gap-2 flex-col px-4 ">
+        <div>
             <Header />
+            <div className="flex gap-2 flex-col px-4 py-8 ">
 
-            <div className="flex items-center   gap-1 p-4 text-gray-600 text-2xl">
-                <BiMessage className="inline" />
-                <span>Conversas</span>
-            </div>
-
-            <Link to={`/`} className="flex items-center gap-1 px-4">
-                <GiReturnArrow />
-                <strong>{"Voltar"}</strong>
-            </Link>
-
-            <div className="flex justify-center py-16">
-
-                <div className="flex flex-col gap-12 w-[800px]">
-                    {messages.map((message) => {
-                        const { dateRelativeToNow, dateFormatted } = getRelativeDate(new Date(message.date));
-                        const avatarUrl = message.direction === 'received' ? userAvatarURL : "/public/assets/images/sent.jpg"
-
-
-                        switch (message.type) {
-                            case contentFormat.TEXT:
-                                return (
-                                    <MessageText key={message.id} content={message.content} messageDateText={message.date} direction={message.direction} formattedDate={dateFormatted} relativeDate={dateRelativeToNow} avatarUrl={avatarUrl} />
-                                )
-
-                            case contentFormat.OPTIONS:
-                                return (
-                                    <MessageOptions key={message.id} content={message.content} messageDateText={message.date} direction={message.direction} formattedDate={dateFormatted} relativeDate={dateRelativeToNow} avatarUrl={avatarUrl} />
-                                )
-                            case contentFormat.IMAGES:
-                                return (
-                                    <MessageImage key={message.id} content={message.content} messageDateText={message.date} direction={message.direction} formattedDate={dateFormatted} relativeDate={dateRelativeToNow} avatarUrl={avatarUrl} />
-                                )
-                        }
-                    })}
-
+                <div className="flex items-center gap-1   text-gray-600 text-2xl">
+                    <BiMessage className="inline" />
+                    <span>Conversas</span>
                 </div>
-            </div>
-        </div >
+
+                <Link to={`/`} className="flex items-center gap-1 px-4">
+                    <GiReturnArrow />
+                    <strong>{"Voltar"}</strong>
+                </Link>
+
+                <div className="flex justify-center py-16">
+
+                    <div className="flex flex-col gap-12 w-[800px]">
+                        {messages.map((message) => {
+                            const { dateRelativeToNow, dateFormatted } = getRelativeDate(new Date(message.date));
+                            const avatarUrl = message.direction === 'received' ? userAvatarURL : "/public/assets/images/sent.jpg"
+
+
+                            switch (message.type) {
+                                case contentFormat.TEXT:
+                                    return (
+                                        <MessageText key={message.id} content={message.content} messageDateText={message.date} direction={message.direction} formattedDate={dateFormatted} relativeDate={dateRelativeToNow} avatarUrl={avatarUrl} />
+                                    )
+
+                                case contentFormat.OPTIONS:
+                                    return (
+                                        <MessageOptions key={message.id} content={message.content} messageDateText={message.date} direction={message.direction} formattedDate={dateFormatted} relativeDate={dateRelativeToNow} avatarUrl={avatarUrl} />
+                                    )
+                                case contentFormat.IMAGES:
+                                    return (
+                                        <MessageImage key={message.id} content={message.content} messageDateText={message.date} direction={message.direction} formattedDate={dateFormatted} relativeDate={dateRelativeToNow} avatarUrl={avatarUrl} />
+                                    )
+                            }
+                        })}
+
+                    </div>
+                </div>
+            </div >
+
+
+        </div>
 
     )
 }

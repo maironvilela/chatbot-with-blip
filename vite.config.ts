@@ -6,7 +6,7 @@ import path from 'path'
 export default defineConfig({
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src'), // Exemplo: '@' aponta para a pasta 'src'
+      '@': path.resolve(__dirname, './src'),
       // Adicione outros aliases conforme necessário
     },
   },
