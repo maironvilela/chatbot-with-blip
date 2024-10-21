@@ -1,30 +1,32 @@
 
-import { format, formatDistanceToNow } from "date-fns";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { ContactContext, Message } from "../../contexts/contact";
-import { getDateUtcFormat } from "../../utils/date-utc-format";
-import { ptBR } from "date-fns/locale";
 import { AuthenticateContext } from "../../contexts/authenticate";
-import { IconButton, Tooltip } from "@radix-ui/themes";
-import { RxExit } from "react-icons/rx";
+import { Message, useContact } from "../../hooks/use-contact";
+import { Header } from "../../components/header";
+import { UseDate } from "./hooks/use-data";
+import { MessageOptions } from "./components/message-options";
+import { MessageText } from "./components/message.-text";
+import { MessageImage } from "./components/message-image";
 
 
 export function Contact() {
-    const { isUserAuthenticated, logout } = useContext(AuthenticateContext);
+    const { id } = useParams();
     const navigate = useNavigate();
 
+    const { getMessagesContact } = useContact()
+    const { isUserAuthenticated } = useContext(AuthenticateContext);
+    const { getRelativeDate } = UseDate()
 
-
-    const { id } = useParams();
     const [messages, setMessages] = useState<Message[]>([])
 
-    const { getMessagesContact } = useContext(ContactContext)
 
-    const handleLogout = () => {
-        logout();
-        navigate("/login");
+    const contentFormat = {
+        TEXT: 'text/plain',
+        OPTIONS: 'application/vnd.lime.select+json',
+        IMAGES: 'application/vnd.lime.media-link+json'
     }
+
 
     useEffect(() => {
 
@@ -46,97 +48,32 @@ export function Contact() {
     }, [getMessagesContact, id, isUserAuthenticated, navigate])
 
     return (
-        <div className="flex gap-2 flex-col">
-            <header className='flex py-2 px-8 items-center bg-violet-400 justify-between'>
-                <div className="flex items-center">
-                    <img src="/public/assets/images/login.png" className="rounded-full h-12 w-12" />
-                    <h2 className="font-bold text-lg">ChatBot</h2>
-                </div>
-
-                <div className="flex items-center gap-8">
-                    <div className="flex items-center gap-2">
-                        <img src="/public/assets/images/avatar-anonimo.jpg" className="rounded-full h-8 w-8" />
-                        <span>Administrator</span>
-                    </div>
-
-                    <Tooltip content="Sair">
-                        <IconButton radius="full" color="violet" onClick={() => handleLogout()}>
-                            <RxExit />
-                        </IconButton>
-                    </Tooltip>
-                </div>
-
-            </header>
-            <div className="flex justify-center">
+        <div className="flex gap-2 flex-col ">
+            <Header />
+            <div className="flex justify-center py-6">
                 <div className="flex flex-col gap-12 w-[800px]">
-                    {messages.map((m) => {
+                    {messages.map((message) => {
+                        const { dateRelativeToNow, dateFormatted } = getRelativeDate(new Date(message.date));
 
-                        const dataHoraUtc = getDateUtcFormat(new Date(m.date));
-                        const messageDateFormatted = format(
-                            dataHoraUtc,
-                            "dd 'de' LLLL 'às' HH:mm'h'",
-                            {
-                                locale: ptBR
-                            }
-                        );
-                        const messageDateRelativeToNow = formatDistanceToNow(dataHoraUtc, {
-                            locale: ptBR,
-                            addSuffix: true
-                        });
+                        switch (message.type) {
+                            case contentFormat.TEXT:
+                                return (
+                                    <MessageText key={message.id} content={message.content} messageDateText={message.date} direction={message.direction} formattedDate={dateFormatted} relativeDate={dateRelativeToNow} />
+                                )
 
-                        if (m.type === 'text/plain') {
-                            return (
-                                <div key={m.id} className={`flex flex-col gap-2 w-2/3 p-4 ${m.direction === 'sent' ? " bg-gray-100" : "bg-green-100 ml-auto"}`} >
-                                    <div className="flex text-center justify-between ">
-                                        <div className="flex gap-2 items-center text-left w-3/4">
-                                            <img className="w-10 h-10 rounded-full" src={`/public/assets/images/${m.direction}.jpg`} alt="" />
-                                            <span>{m.content}</span>
-                                        </div>
-                                        <time className="w-30 text-gray-400 flex items-end"
-                                            title={messageDateFormatted}
-                                            dateTime={new Date(m.date).toISOString()}
-                                        >
-                                            {messageDateRelativeToNow}
-                                        </time>
+                            case contentFormat.OPTIONS:
+                                return (
+                                    <MessageOptions key={message.id} content={message.content} messageDateText={message.date} direction={message.direction} formattedDate={dateFormatted} relativeDate={dateRelativeToNow} />
+                                )
+                            case contentFormat.IMAGES:
+                                return (
+                                    <MessageImage key={message.id} content={message.content} messageDateText={message.date} direction={message.direction} formattedDate={dateFormatted} relativeDate={dateRelativeToNow} />
+                                )
 
 
-                                    </div>
-                                </div>
-                            )
                         }
-
-                        if (m.type === 'application/vnd.lime.select+json') {
-                            return (
-                                <div key={m.id} className={`flex flex-col gap-2 w-2/3  p-4 ${m.direction === 'sent' ? " bg-gray-100" : "bg-green-100 ml-auto"}`} >
-                                    <div className="flex ">
-                                        <img className="w-10 h-10 rounded-full" src={`/public/assets/images/${m.direction}.jpg`} alt="" />
-                                        <div className="flex flex-col gap-1">
-                                            <span>{m.content.text}</span>
-                                            <ul>
-                                                {m.content.options.map((option: { text: string }) => (
-                                                    <li key={option.text[0]} className="text-gray-400">{option.text}</li>
-                                                ))}
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            )
-                        }
-
-                        return (
-                            <div key={m.id} className={`flex flex-col gap-2 w-2/3 ${m.direction === 'sent' ? "" : "ml-auto"}`}  >
-
-                                <div className="flex gap-2">
-                                    <img className="w-10 h-10 rounded-full" src={`/public/assets/images/${m.direction}.jpg`} alt="" />
-                                    <div>
-                                        <img src={m.content.uri} />
-                                        <span>{m.content.text}</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                        )
                     })}
+
                 </div>
             </div>
         </div>

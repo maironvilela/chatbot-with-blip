@@ -2,13 +2,13 @@ import { useContext, useEffect, useState } from "react"
 import { Contact } from "../../domain/models/contact"
 import { CardContact } from "./components/card";
 import { useNavigate } from "react-router";
-import { ContactContext } from "../../contexts/contact";
 import { Paginator } from "./components/paginator";
 import { AuthenticateContext } from "../../contexts/authenticate";
-import { RxExit } from "react-icons/rx";
-import { IconButton, Tooltip } from "@radix-ui/themes";
+
 import { GrContactInfo } from "react-icons/gr";
 import { Select } from "./components/select";
+import { useContact } from "../../hooks/use-contact";
+import { Header } from "../../components/header";
 
 
 type ContactsDataType = {
@@ -18,7 +18,7 @@ type ContactsDataType = {
 
 export function Contacts() {
 
-  const { isUserAuthenticated, logout } = useContext(AuthenticateContext);
+  const { isUserAuthenticated } = useContext(AuthenticateContext);
 
 
   const navigate = useNavigate();
@@ -26,7 +26,8 @@ export function Contacts() {
   const [page, setPage] = useState(1)
   const [itemPerPage, setItemPerPage] = useState("2")
   const [contactsData, setContactsData] = useState<ContactsDataType>()
-  const { getContactList } = useContext(ContactContext)
+
+  const { getContactList } = useContact()
 
   useEffect(() => {
 
@@ -49,32 +50,10 @@ export function Contacts() {
     setPage(pageProps)
   }
 
-  const handleLogout = () => {
-    logout();
-    navigate(`/login`)
-  }
+
   return (
     <div className="flex flex-col gap-4 h-full">
-      <header className='flex py-2 px-8 items-center bg-violet-400 justify-between'>
-        <div className="flex items-center">
-          <img src="/public/assets/images/login.png" className="rounded-full h-12 w-12" />
-          <h2 className="font-bold text-lg">ChatBot</h2>
-        </div>
-
-        <div className="flex items-center gap-8">
-          <div className="flex items-center gap-2">
-            <img src="/public/assets/images/avatar-anonimo.jpg" className="rounded-full h-8 w-8" />
-            <span>Administrator</span>
-          </div>
-
-          <Tooltip content="Sair">
-            <IconButton radius="full" color="violet" onClick={() => handleLogout()}>
-              <RxExit />
-            </IconButton>
-          </Tooltip>
-        </div>
-
-      </header>
+      <Header />
 
       <div className="max-w=[1440px]">
 
