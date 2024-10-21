@@ -7,8 +7,9 @@ import { AuthenticateContext } from "../../contexts/authenticate";
 
 import { GrContactInfo } from "react-icons/gr";
 import { Select } from "./components/select";
-import { useContact } from "../../hooks/use-contact";
 import { Header } from "../../components/header";
+import { ContactContext } from "../../contexts/contact";
+import { getAvatarUrl } from "../../utils/get-avatar-url";
 
 
 type ContactsDataType = {
@@ -19,6 +20,7 @@ type ContactsDataType = {
 export function Contacts() {
 
   const { isUserAuthenticated } = useContext(AuthenticateContext);
+  const { getContactList } = useContext(ContactContext)
 
 
   const navigate = useNavigate();
@@ -27,7 +29,6 @@ export function Contacts() {
   const [itemPerPage, setItemPerPage] = useState("2")
   const [contactsData, setContactsData] = useState<ContactsDataType>()
 
-  const { getContactList } = useContact()
 
   useEffect(() => {
 
@@ -67,18 +68,21 @@ export function Contacts() {
 
         <div className="flex flex-wrap justify-center gap-4 h-full pt-6 ">
           {
-            contactsData?.contacts.map((c: Contact) => (
-              <button key={c.identity}
-                className="hover:brightness-90 transition ease-in-out"
-                onClick={() => handleSelectedContact(c.identity)}>
-                <CardContact
-                  identity={c.identity}
-                  name={c.name}
-                  email={c.email}
-                  imageUrl={c.imageUrl} />
-              </button>
-            ))
-          }
+            contactsData?.contacts.map((c: Contact) => {
+              const avatarUrl = getAvatarUrl();
+              return (
+                <button key={c.identity}
+                  className="hover:brightness-90 transition ease-in-out"
+                  onClick={() => handleSelectedContact(c.identity)}>
+                  <CardContact
+                    identity={c.identity}
+                    name={c.name}
+                    email={c.email}
+                    imageUrl={avatarUrl} />
+                </button>
+              )
+            })}
+
         </div >
         <footer className="flex justify-center absolute bottom-8 w-full">
           <Paginator currentPage={page} numberOfRecords={contactsData?.numberOfRecords} handleChangePage={handleChangePage} itemsPerPage={Number(itemPerPage)} />

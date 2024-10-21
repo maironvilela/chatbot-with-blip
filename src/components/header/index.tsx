@@ -4,10 +4,13 @@ import { AuthenticateContext } from "../../contexts/authenticate";
 import { RxExit } from "react-icons/rx";
 import { IconButton, Tooltip } from "@radix-ui/themes";
 import { useNavigate } from "react-router";
+import { getAvatarUrl } from "../../utils/get-avatar-url";
 export function Header() {
     const navigate = useNavigate();
 
     const { logout } = useContext(AuthenticateContext);
+
+    const avatarUrl = getAvatarUrl();
 
 
     const handleLogout = () => {
@@ -23,8 +26,8 @@ export function Header() {
 
             <div className="flex items-center gap-8">
                 <div className="flex items-center gap-2">
-                    <img src="/public/assets/images/avatar-anonimo.jpg" className="rounded-full h-8 w-8" />
-                    <span>Administrator</span>
+                    <img src={avatarUrl} className="rounded-full h-8 w-8" />
+                    <h2 className="font-bold text-lg">Administrador</h2>
                 </div>
 
                 <Tooltip content="Sair">
