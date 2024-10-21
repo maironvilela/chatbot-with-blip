@@ -1,9 +1,9 @@
+import 'dotenv/config'
 import { describe, expect, it } from 'vitest'
 import { HttpClient } from '../../protocols/adapters/http-client'
 import { AuthenticateService } from '.'
 import { AxiosAdapter } from '../../../main/adapters/axios'
 import { AuthenticateGatewayImp } from '../../../infra/gateways/authenticator'
-
 type SutType = {
   sut: AuthenticateService
   httpClient: HttpClient
@@ -20,10 +20,8 @@ const makeSut = (): SutType => {
 describe('AuthenticateService', () => {
   it('Should be able to authenticate', async () => {
     const { sut } = makeSut()
-    const API_KEY = 'Key ZmVlZGJhY2tzaXRlOmJVT3lTQTNqTXhnUHRIelJWY1Jx'
-
+    const API_KEY = import.meta.env.VITE_BLIP_API_KEY
     const response = await sut.execute(API_KEY)
-
     expect(response).toBe(true)
   })
 
@@ -34,5 +32,3 @@ describe('AuthenticateService', () => {
     expect(response).toBe(false)
   })
 })
-
-//TODO: Validar se chave é valida (expressao regular)

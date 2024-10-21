@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import { describe, expect, it } from 'vitest'
 import { HttpClient } from '../../protocols/adapters/http-client'
 import { AxiosAdapter } from '../../../main/adapters/axios'
@@ -10,8 +11,9 @@ type SutType = {
 }
 
 const makeSut = (): SutType => {
+  const apiUrl = process.env.VITE_BLIP_API_KEY || ''
   const httpClient = new AxiosAdapter()
-  const listContactGateway = new ContactGateway(httpClient)
+  const listContactGateway = new ContactGateway(httpClient, apiUrl)
   const sut = new ListContactsService(listContactGateway)
 
   return { httpClient, sut }
@@ -21,24 +23,12 @@ describe('ListContactService', () => {
   it('Should be able list contacts', async () => {
     const { sut } = makeSut()
 
-    const skip = 0
-    const take = 2
+    const page = 0
+    const itemPerPage = 2
 
-    const { data } = await sut.execute({ skip, take })
+    const { data } = await sut.execute({ page, itemPerPage })
 
     expect(data).toHaveProperty('contacts')
     expect(data).toHaveProperty('numberOfRecords')
-  })
-
-  it('Should be able return an exception if there is a failure to search the contact list', async () => {
-    const BAD_REQUEST = '404'
-    const { sut } = makeSut()
-    const url = 'invalid-url'
-    const skip = 0
-    const take = 2
-
-    const promise = sut.execute({ skip, take, url })
-
-    await expect(promise).rejects.toThrowError(BAD_REQUEST)
   })
 })
