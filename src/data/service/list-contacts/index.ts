@@ -4,14 +4,14 @@ import { ListContactGateway } from '../../protocols/gateways/list-contacts'
 export class ListContactsService implements ListContactsPaginatorUseCase {
   constructor(private listContactGateway: ListContactGateway) {}
   async execute({
-    skip,
-    take,
+    page,
+    itemPerPage,
     url,
   }: ListContactsPaginatorUseCase.Props): Promise<ListContactsPaginatorUseCase.Response> {
     try {
       const data = await this.listContactGateway.getAllContactsPaginator({
-        skip,
-        take,
+        page,
+        itemPerPage,
         url,
       })
       return data

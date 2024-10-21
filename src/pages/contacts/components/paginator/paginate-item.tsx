@@ -10,7 +10,7 @@ export function PaginateItem({ page, isSelected, handleChangePage }: PaginateIte
         <button className={`${isSelected ? "bg-violet-600 " : "bg-violet-400 "} px-4 py-1 rounded-full ${isSelected ? "" : "hover:brightness-75"}`}
             disabled={isSelected}
             onClick={() => handleChangePage(page)}>
-            <span className="text-gray-100 text-md text-  ease-in-out ">{page + 1}</span>
+            <span className="text-gray-100 text-md text-  ease-in-out ">{page}</span>
         </button>
     )
 }

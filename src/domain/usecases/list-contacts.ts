@@ -8,8 +8,8 @@ export interface ListContactsPaginatorUseCase {
 
 export namespace ListContactsPaginatorUseCase {
   export type Props = {
-    skip: number
-    take: number
+    page: number
+    itemPerPage: number
     url?: string
   }
   export type Response = {

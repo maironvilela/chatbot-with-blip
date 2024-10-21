@@ -8,8 +8,8 @@ export interface ListContactGateway {
 
 export namespace ListContactGateway {
   export type Props = {
-    skip: number
-    take: number
+    page: number
+    itemPerPage: number
     url?: string
   }
   export type Response = {

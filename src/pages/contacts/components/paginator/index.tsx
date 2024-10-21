@@ -17,25 +17,30 @@ export function Paginator({ numberOfRecords = 0, itemsPerPage, currentPage, hand
   const pageSize = Math.ceil(numberOfRecords / itemsPerPage);
 
 
-  if ((pageSize <= 1) && (pageSize <= 5)) {
+  initialPage = currentPage - 2
+  finalPage = currentPage + 2
+
+  if (currentPage < 5) {
     initialPage = 1;
-    finalPage = pageSize
-  } else {
-    initialPage = 0
+    finalPage = 5
+  }
+
+  if (currentPage > pageSize - 5) {
+    initialPage = pageSize - 5
     finalPage = pageSize
   }
 
   const array = new Array(pageSize)
 
-  for (let i = 0; i < pageSize; i++) {
+  for (let i = initialPage; i <= pageSize; i++) {
     array[i] = i;
   }
 
   return (
 
-    <div className="flex flex-row gap-4 bg-red h-10">
+    <div className="flex flex-row gap-4 bg-red h-10"  >
       {array.map((_, index) => {
-        if (index >= initialPage && index < finalPage) {
+        if (index >= initialPage && index <= finalPage && index > 0) {
           return (
             <PaginateItem page={index} key={index} isSelected={index === currentPage} handleChangePage={handleChangePage} />
           )

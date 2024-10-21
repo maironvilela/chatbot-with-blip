@@ -9,8 +9,8 @@ type ContactProps = {
 }
 
 type getContactListProps = {
-    skip: number
-    take: number
+    page: number
+    itemPerPage: number
 }
 
 type getContactListResponse = {
@@ -23,6 +23,7 @@ type getContactListResponse = {
 type ContactContextTypes = {
     getContactList: (data: getContactListProps) => Promise<getContactListResponse>
     getMessagesContact: (id: string) => Promise<any>
+
 }
 
 export type Message = {
@@ -40,7 +41,7 @@ export function ContactContextProvider({
     children,
 }: ContactProps) {
 
-    const getContactList = async ({ skip, take }: getContactListProps): Promise<getContactListResponse> => {
+    const getContactList = async ({ page, itemPerPage }: getContactListProps): Promise<getContactListResponse> => {
 
         const apiKey = localStorage.getItem("apiKey")
 
@@ -48,7 +49,7 @@ export function ContactContextProvider({
 
         const listContactService = makeListContactsService(apiKey)
         const contacts = await listContactService.execute({
-            skip, take
+            page, itemPerPage
         })
         return contacts
     }
@@ -61,6 +62,8 @@ export function ContactContextProvider({
         const response = await findAllConversationOfContactService.findConversationOfContacts({ id });
         return response.data.resource.items;
     }
+
+
 
     return (
         <ContactContext.Provider value={{ getContactList, getMessagesContact }}>

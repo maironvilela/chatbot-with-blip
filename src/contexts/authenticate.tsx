@@ -9,6 +9,7 @@ type AuthenticateContextProviderProps = {
 type AuthenticateContextTypes = {
   auth: (apiKey: string) => Promise<boolean>
   isUserAuthenticated: () => boolean
+  logout: () => void
 }
 
 export const AuthenticateContext = createContext({} as AuthenticateContextTypes)
@@ -33,8 +34,13 @@ export function AuthenticateContextProvider({
     return apiKey !== null
   }
 
+  const logout = () => {
+    localStorage.removeItem("apiKey")
+
+  }
+
   return (
-    <AuthenticateContext.Provider value={{ auth, isUserAuthenticated }}>
+    <AuthenticateContext.Provider value={{ auth, isUserAuthenticated, logout }}>
       {children}
     </AuthenticateContext.Provider>
   )

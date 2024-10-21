@@ -15,18 +15,17 @@ export class ContactGateway
     return this.httpClient.post({ body, headers })
   }
   async getAllContactsPaginator({
-    skip,
-    take,
-    url,
+    page,
+    itemPerPage,
   }: ListContactGateway.Props): Promise<ListContactGateway.Response> {
     const { body, headers } =
       BlipHttpHelpers.getInformationGetContactsWithPagingEndPoint({
-        skip,
-        take,
+        skip: page,
+        take: itemPerPage,
         apiKey: this.apiKey,
       })
 
-    const response = await this.httpClient.post({ body, url, headers })
+    const response = await this.httpClient.post({ body, headers })
 
     const data = {
       contacts: response.data.resource.items,
