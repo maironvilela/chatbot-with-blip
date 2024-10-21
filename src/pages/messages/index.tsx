@@ -73,7 +73,7 @@ export function Contact() {
 
                 <div className="flex justify-center py-16">
 
-                    <div className="flex flex-col gap-12 w-[800px]">
+                    <div className="flex flex-col gap-12 w-[800px] px-12">
                         {messages.map((message) => {
                             const { dateRelativeToNow, dateFormatted } = getRelativeDate(new Date(message.date));
                             const avatarUrl = message.direction === 'received' ? userAvatarURL : "/public/assets/images/sent.jpg"
@@ -82,16 +82,20 @@ export function Contact() {
                             switch (message.type) {
                                 case contentFormat.TEXT:
                                     return (
-                                        <MessageText key={message.id} content={message.content} messageDateText={message.date} direction={message.direction} formattedDate={dateFormatted} relativeDate={dateRelativeToNow} avatarUrl={avatarUrl} />
+                                        <MessageText content={message.content} messageDateText={message.date} direction={message.direction} formattedDate={dateFormatted} relativeDate={dateRelativeToNow} avatarUrl={avatarUrl} />
                                     )
 
                                 case contentFormat.OPTIONS:
                                     return (
+
                                         <MessageOptions key={message.id} content={message.content} messageDateText={message.date} direction={message.direction} formattedDate={dateFormatted} relativeDate={dateRelativeToNow} avatarUrl={avatarUrl} />
+
                                     )
                                 case contentFormat.IMAGES:
                                     return (
+
                                         <MessageImage key={message.id} content={message.content} messageDateText={message.date} direction={message.direction} formattedDate={dateFormatted} relativeDate={dateRelativeToNow} avatarUrl={avatarUrl} />
+
                                     )
                             }
                         })}

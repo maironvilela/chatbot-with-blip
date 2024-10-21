@@ -17,7 +17,7 @@ type MessageImageProps = {
 export function MessageImage({ direction, content, avatarUrl, formattedDate, messageDateText, relativeDate }: MessageImageProps) {
 
     return (
-        <div className={`flex flex-col gap-2 w-2/3 ${direction === 'sent' ? "" : "ml-auto"}`}  >
+        <div className={`flex flex-col gap-2 w-2/3  p-4 ${direction === 'sent' ? "" : "ml-auto"}`}  >
             <div className="flex gap-2">
                 <img className="w-10 h-10 rounded-full" src={avatarUrl} />
                 <div>
