@@ -106,7 +106,7 @@ informações do bot.
 **Passo 01:** Faça o clone do repositório
 
 ```
-git clone
+git clone https://github.com/maironvilela/chatbot-with-blip.git
 ```
 
 **Passo 02:** Acesse o diretório do projeto, e altere o nome do arquivo `.env_example` para `.env`
