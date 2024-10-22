@@ -53,7 +53,7 @@ export function AnimatedBeamDemo() {
                         <img src="https://avatars.githubusercontent.com/u/91197082" className="rounded-full" />
                     </Circle>
                     <Circle ref={div4Ref} className="p-0 bg-transparent border-none">
-                        <img src="/public/assets/images/login.png" />
+                        <img src="../../assets/images/login.png" />
                     </Circle>
                     <Circle ref={div6Ref} className=" p-0">
                         <img src="https://avatars.githubusercontent.com/u/69543817" className="rounded-full" />

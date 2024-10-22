@@ -61,7 +61,7 @@ export function Login() {
         <div className="grid bg-gray-100 h-screen grid-cols-1 md:grid-cols-2 max-w-[1440px] m-auto" >
 
             <section className=" hidden md:flex flex-col   text-center  items-center justify-center    h-full bg-violet-600 ">
-                <img src="/public/assets/images/login.png" alt="imagens de um robô setando utilizando um notebook" className="lg:w-96 xl:w-2/3" />
+                <img src="../../assets/images/login.png" alt="imagens de um robô setando utilizando um notebook" className="lg:w-96 xl:w-2/3" />
             </section >
 
             <section className="flex flex-col h-full w-full px-16 justify-center  ">

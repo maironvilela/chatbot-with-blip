@@ -24,7 +24,7 @@ export function Header() {
     return (
         <header className='flex py-2 px-8 items-center bg-violet-400 justify-between'>
             <div className="flex items-center">
-                <img src="/public/assets/images/login.png" className="rounded-full h-12 w-12" />
+                <img src="../../assets/images/login.png" className="rounded-full h-12 w-12" />
                 <h2 className="font-bold text-lg">ChatBot</h2>
             </div>
 
