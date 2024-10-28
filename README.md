@@ -6,15 +6,13 @@
     <a href="#sobre-o-projeto">Sobre o Projeto</a> |
     <a href="#principais-tecnologias">Principais Tecnologias</a> |
     <a href="#principais-recursos">Principais Recursos</a> |
-    <a href="#principais-recursos">Principais Recursos</a> |
-    <a href="estrutura_do_projeto">Estrutura do Projeto</a> |
-    <a href="executando_o_projeto">Executando o projeto</a> |
-   
+    <a href="#estrutura_do_projeto">Estrutura do Projeto</a> |
+    <a href="#executando_o_projeto">Executando o projeto</a>   
 </p>
 
 [![Pagina de para authenticação da chave API ](https://sa-east-1.graphassets.com/clzr3qy8z0jvv07lsbu9dh3xe/output=format:jpg/cm2jl6f1u09d307kiozm3tjj4)
 
-# 📒 Sobre o Projeto
+# 📒Sobre o Projeto
 
 Desenvolvimento de uma aplicação web para exibição dos contatos e conversas de um chatbot da
 plataforma Blip. A aplicação deverá ter três rotas principais e utilizar a API do Blip para obter as
@@ -47,7 +45,7 @@ informações do bot.
 - Utilizar a API do Blip para obter as mensagens trocadas com o contato
   selecionado.
 
-# 💻 Principais Tecnologias
+#💻Principais Tecnologias
 
 [![](https://img.shields.io/badge/@Code-React-052051)]()
 [![](https://img.shields.io/badge/@Code-typescript-052051)]()
@@ -61,7 +59,7 @@ informações do bot.
 
 [![](https://img.shields.io/badge/@Validação_de_daros-Zod-708090)]()
 
-# ⚒️ Principais Recursos
+# ⚒️Principais Recursos
 
 [![](https://img.shields.io/badge/Consumo_API_plataforma_blip-052051)]()
 [![](https://img.shields.io/badge/Estilização_utilizando_a_biblioteca_tailwind_-052051)]()
@@ -75,7 +73,7 @@ informações do bot.
 [![](<https://img.shields.io/badge/Aplicação_(ou_tentativa)_do_arquitetura_Clean_Architecture-052051>)]()
 [![](https://img.shields.io/badge/Utilização_da_biblioteca_axios_para_consumo_de_API-052051)]()
 
-# 📂 Estrutura do Projeto
+# 📂Estrutura do Projeto
 
 ```
   |-src
@@ -101,12 +99,12 @@ informações do bot.
 
 ```
 
-# 🚀 Executando o projeto
+# 🚀Executando o projeto
 
 **Passo 01:** Faça o clone do repositório
 
 ```
-git clone
+git clone https://github.com/maironvilela/chatbot-with-blip.git
 ```
 
 **Passo 02:** Acesse o diretório do projeto, e altere o nome do arquivo `.env_example` para `.env`
@@ -123,7 +121,7 @@ git clone
 npm run dev
 ```
 
-# Screenshots do Projeto
+#🎞️Screenshots do Projeto
 
 ## Pagina de Login
 
@@ -138,3 +136,4 @@ npm run dev
 [![Pagina de listagem dos contatos ](https://sa-east-1.graphassets.com/clzr3qy8z0jvv07lsbu9dh3xe/output=format:jpg/cm2jmwmmy09kj07kl8ibcm642)
 
 # Projeto On-line
+
