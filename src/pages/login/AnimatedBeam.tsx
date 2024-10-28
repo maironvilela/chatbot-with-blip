@@ -53,7 +53,7 @@ export function AnimatedBeamDemo() {
                         <img src="https://avatars.githubusercontent.com/u/91197082" className="rounded-full" />
                     </Circle>
                     <Circle ref={div4Ref} className="p-0 bg-transparent border-none">
-                        <img src="../../assets/images/login.png" />
+                        <img src="https://png.pngtree.com/png-vector/20240628/ourmid/pngtree-3d-robot-png-image_12841934.png" />
                     </Circle>
                     <Circle ref={div6Ref} className=" p-0">
                         <img src="https://avatars.githubusercontent.com/u/69543817" className="rounded-full" />
