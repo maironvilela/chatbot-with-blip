@@ -76,7 +76,7 @@ export function Contact() {
                     <div className="flex flex-col gap-12 w-[800px] px-12">
                         {messages.map((message) => {
                             const { dateRelativeToNow, dateFormatted } = getRelativeDate(new Date(message.date));
-                            const avatarUrl = message.direction === 'received' ? userAvatarURL : "/public/assets/images/sent.jpg"
+                            const avatarUrl = message.direction === 'received' ? userAvatarURL : "https://png.pngtree.com/png-vector/20240628/ourmid/pngtree-3d-robot-png-image_12841934.png"
 
 
                             switch (message.type) {
