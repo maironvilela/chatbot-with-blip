@@ -46,7 +46,7 @@ Esta aplicação web permite gerenciar contatos e visualizar conversas de um cha
 - Utilizar a API do Blip para obter as mensagens trocadas com o contato
   selecionado.
 
-#💻Principais Tecnologias
+# 💻Principais Tecnologias
 
 ## 🚀 Principais Tecnologias   
 
