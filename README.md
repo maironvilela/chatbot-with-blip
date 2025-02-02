@@ -19,7 +19,7 @@
 
 Esta aplicação web permite gerenciar contatos e visualizar conversas de um chatbot criado na plataforma Blip. O sistema é dividido em três rotas principais e utiliza a API do Blip para buscar informações.
 
-## 🚀 Rota de login (/login)
+## 🚀Rota de login (/login)
 
 - O usuário deve inserir uma chave de API válida do bot no Blip.
 - A aplicação deve autenticar o usuário e salvar de forma persistente para uso nas
@@ -46,9 +46,7 @@ Esta aplicação web permite gerenciar contatos e visualizar conversas de um cha
 - Utilizar a API do Blip para obter as mensagens trocadas com o contato
   selecionado.
 
-# 💻Principais Tecnologias
-
-## 🚀 Principais Tecnologias   
+# 💻Principais Tecnologias   
 
 [![](https://img.shields.io/badge/@Code-React-052051)]()
 [![](https://img.shields.io/badge/@Code-typescript-052051)]()
@@ -63,7 +61,7 @@ Esta aplicação web permite gerenciar contatos e visualizar conversas de um cha
 [![](https://img.shields.io/badge/@Validação_de_dados-Zod-708090)]()
 
 
-## ⚒️ Principais Recursos  
+# ⚒️Principais Recursos  
 - 🔗 **Consumo da API da Plataforma Blip**  
 - 🎨 **Estilização com TailwindCSS**  
 - ✅ **Validação de dados com Zod**  
