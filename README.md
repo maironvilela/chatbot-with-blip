@@ -1,6 +1,9 @@
 <h1 align="center">
-     Projeto ChatBot - Ferenciando contatos da plataforma Blip
- </h1>
+     # 🤖 ChatBot - Gerenciamento de Contatos na Plataforma Blip
+</h1>
+<h2 align="center">
+     Uma aplicação web para exibição e gerenciamento de contatos e conversas de um chatbot utilizando a API da plataforma Blip.
+</h2
 
   <p align="center">
     <a href="#sobre-o-projeto">Sobre o Projeto</a> |
@@ -10,13 +13,11 @@
     <a href="#executando_o_projeto">Executando o projeto</a>   
 </p>
 
-[![Pagina de para authenticação da chave API ](https://sa-east-1.graphassets.com/clzr3qy8z0jvv07lsbu9dh3xe/output=format:jpg/cm2jl6f1u09d307kiozm3tjj4)
+[![Pagina de para autenticação da chave API ](https://sa-east-1.graphassets.com/clzr3qy8z0jvv07lsbu9dh3xe/output=format:jpg/cm2jl6f1u09d307kiozm3tjj4)
 
 # 📒Sobre o Projeto
 
-Desenvolvimento de uma aplicação web para exibição dos contatos e conversas de um chatbot da
-plataforma Blip. A aplicação deverá ter três rotas principais e utilizar a API do Blip para obter as
-informações do bot.
+Esta aplicação web permite gerenciar contatos e visualizar conversas de um chatbot criado na plataforma Blip. O sistema é dividido em três rotas principais e utiliza a API do Blip para buscar informações.
 
 ## Rota de login (/login)
 
@@ -47,6 +48,8 @@ informações do bot.
 
 #💻Principais Tecnologias
 
+## 🚀 Principais Tecnologias   
+
 [![](https://img.shields.io/badge/@Code-React-052051)]()
 [![](https://img.shields.io/badge/@Code-typescript-052051)]()
 
@@ -57,71 +60,67 @@ informações do bot.
 
 [![](https://img.shields.io/badge/@Plataforma_Chatbot-Blip-f0abfc)]()
 
-[![](https://img.shields.io/badge/@Validação_de_daros-Zod-708090)]()
+[![](https://img.shields.io/badge/@Validação_de_dados-Zod-708090)]()
 
-# ⚒️Principais Recursos
 
-[![](https://img.shields.io/badge/Consumo_API_plataforma_blip-052051)]()
-[![](https://img.shields.io/badge/Estilização_utilizando_a_biblioteca_tailwind_-052051)]()
-[![](https://img.shields.io/badge/Validação_de_dados_utilizando_a_biblioteca_ZOD-052051)]()
-[![](https://img.shields.io/badge/Utilização_de_hooks_personalizados-052051)]()
-[![](https://img.shields.io/badge/Compartilhando_informações_com_ContextAPI-052051)]()
-[![](https://img.shields.io/badge/Aplicação_do_padrã0_de_projeto_adapter-052051)]()
-[![](https://img.shields.io/badge/Aplicação_do_padrã0_de_projeto_gateways-052051)]()
-[![](https://img.shields.io/badge/Aplicação_do_padrã0_de_projeto_factory-052051)]()
-[![](https://img.shields.io/badge/Injeção_de_dependencia-052051)]()
-[![](<https://img.shields.io/badge/Aplicação_(ou_tentativa)_do_arquitetura_Clean_Architecture-052051>)]()
-[![](https://img.shields.io/badge/Utilização_da_biblioteca_axios_para_consumo_de_API-052051)]()
+## ⚒️ Principais Recursos  
+- 🔗 **Consumo da API da Plataforma Blip**  
+- 🎨 **Estilização com TailwindCSS**  
+- ✅ **Validação de dados com Zod**  
+- 🔄 **Hooks Personalizados para Reutilização de Lógica**  
+- 📦 **Gerenciamento de Estado com Context API**  
+- 🏗️ **Padrões de Projeto: Adapter, Gateways, Factory**  
+- 📥 **Injeção de Dependências**  
+- 🗂️ **Arquitetura Limpa (Clean Architecture)**  
+- 🌐 **Requisições HTTP com Axios**  
 
 # 📂Estrutura do Projeto
-
 ```
-  |-src
-     |-components: componentes do projeto compartilhados
-         |-ui: Utilizado pela biblioteca magic-ui para adicionar os componentes no projeto
-     |-context: Contextos utilizados pelas paginas para recuperar informações globais do sistema
-     |-data
-         |-protocols: Protocolos utilizados pelas camadas de domínio e de infraestrutura
-             |-adapters: Adaptadores utilizados para comunicação com bibliotecas externas
-             |-gateways: Gateways utilizados para definir a comunicação com a API externas
-         |-service: Implementação dos usecases definidos na camada de domínio
-     |-domain
-         |-models: Contem os modelos de domínio do sistema
-         |usecases: Contem os casos de uso do sistema
-     |-hooks: Hooks utilizados pelas paginas para executar funções que são compartilhadas
-     |-infra: Camada responsável pela comunicação com a API externa, acesso ao banco de dados e outras funcionalidades para persistência de dados
-     |-lib: Utilizado pela biblioteca magic-ui
-     |-main: É a camada "suja" do projeto, devido conter dependências de bibliotecas externas. Contem os adapters e a criação dos objetos para utilização da Injeção de Dependências.
-     |-pages: Contem as paginas do projeto
-          |-<pagina>
-              |-componentes: Componentes utilizados pela pagina
-     |-utils: Funções utilitárias utilizadas
 
+├── src
+│ ├── components     # Componentes reutilizáveis
+│ │ └── ui           # Integração com a biblioteca magic-ui
+│ ├── context        # Context API para gerenciamento de estado global
+│ ├── data
+│ │ ├── protocols   # Protocolos de comunicação
+│ │ ├── adapters    # Adaptadores para integração com APIs externas
+│ │ └── gateways    # Definições de comunicação com serviços externos
+│ ├── domain
+│ │ ├── models      # Modelos de domínio do sistema
+│ │ └── usecases    # Casos de uso da aplicação
+│ ├── hooks         # Hooks personalizados
+│ ├── infra         # Integração com APIs externas e persistência de dados
+│ ├── lib           # Bibliotecas auxiliares
+│ ├── main          # Configurações principais do projeto (injeção de dependências)
+│ ├── pages         # Páginas da aplicação
+│ └── utils         # Funções utilitárias
 ```
+ 
 
 # 🚀Executando o projeto
 
-**Passo 01:** Faça o clone do repositório
+**1️⃣** Faça o clone do repositório
 
 ```
 git clone https://github.com/maironvilela/chatbot-with-blip.git
 ```
+ 
 
-**Passo 02:** Acesse o diretório do projeto, e altere o nome do arquivo `.env_example` para `.env`
+**2️⃣** Acesse o diretório do projeto, e altere o nome do arquivo `.env_example` para `.env`
 
-**Passo 03:** Informe a URL da API na chave `VITE_BLIP_API_URL`
+**3️⃣** Informe a URL da API na chave `VITE_BLIP_API_URL`
 
 ```
  VITE_BLIP_API_URL =
 ```
 
-**Passo 04:** Execute o comando `npm run dev´ para executar o projeto
+**4️⃣** Execute o comando `npm run dev´ para executar o projeto
 
 ```
 npm run dev
 ```
 
-#🎞️Screenshots do Projeto
+# 🎞️Screenshots do Projeto
 
 ## Pagina de Login
 
@@ -135,5 +134,5 @@ npm run dev
 
 [![Pagina de listagem dos contatos ](https://sa-east-1.graphassets.com/clzr3qy8z0jvv07lsbu9dh3xe/output=format:jpg/cm2jmwmmy09kj07kl8ibcm642)
 
-# Projeto On-line
+
 
