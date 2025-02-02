@@ -19,7 +19,7 @@
 
 Esta aplicação web permite gerenciar contatos e visualizar conversas de um chatbot criado na plataforma Blip. O sistema é dividido em três rotas principais e utiliza a API do Blip para buscar informações.
 
-## Rota de login (/login)
+## 🚀 Rota de login (/login)
 
 - O usuário deve inserir uma chave de API válida do bot no Blip.
 - A aplicação deve autenticar o usuário e salvar de forma persistente para uso nas
@@ -27,7 +27,7 @@ Esta aplicação web permite gerenciar contatos e visualizar conversas de um cha
 - Validação da chave: a aplicação deve validar se a chave inserida é válida ao
   tentar carregar a rota raiz.
 
-## Rota raiz (/):
+## 📇 Rota raiz (/) - Lista de Contatos:
 
 - Após o login bem-sucedido, o usuário deve ser redirecionado para a rota raiz.
 - A rota raiz deve exibir uma lista paginada dos contatos do bot.
@@ -37,7 +37,7 @@ Esta aplicação web permite gerenciar contatos e visualizar conversas de um cha
 - Ao clicar em um contato, o usuário deve ser redirecionado para a página de
   exibição da conversa.
 
-## Rota de conversa do contato (/contato/:id)
+## 💬 Rota de conversa do contato (/contato/:id)
 
 - Ao clicar em um contato na rota raiz, o usuário deve ser redirecionado para esta
   rota, onde será exibida a conversa completa com o contato selecionado.
@@ -122,15 +122,15 @@ npm run dev
 
 # 🎞️Screenshots do Projeto
 
-## Pagina de Login
+## 🗝️ Página de Login  
 
 [![Pagina de para authenticação da chave API ](https://sa-east-1.graphassets.com/clzr3qy8z0jvv07lsbu9dh3xe/output=format:jpg/cm2jl6f1u09d307kiozm3tjj4)
 
-## Pagina de Contatos
+## 📇 Página de Contatos  
 
 [![Pagina de listagem dos contatos ](https://sa-east-1.graphassets.com/clzr3qy8z0jvv07lsbu9dh3xe/output=format:jpg/cm2jmuoqi09mn07kixz6vhm43)
 
-## Pagina de Conversas
+## 💬 Página de Conversas 
 
 [![Pagina de listagem dos contatos ](https://sa-east-1.graphassets.com/clzr3qy8z0jvv07lsbu9dh3xe/output=format:jpg/cm2jmwmmy09kj07kl8ibcm642)
 
